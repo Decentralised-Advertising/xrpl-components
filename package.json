@@ -2,6 +2,11 @@
   "name": "xrpl-components",
   "version": "0.0.0",
   "license": "MIT",
+  "volta": {
+    "node": "14.18.1",
+    "npm": "6.14.15",
+    "yarn": "1.22.10"
+  },
   "scripts": {
     "start": "nx serve",
     "build": "nx build",
