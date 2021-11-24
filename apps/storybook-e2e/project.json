@@ -1,0 +1,28 @@
+{
+  "root": "apps/storybook-e2e",
+  "sourceRoot": "apps/storybook-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/storybook-e2e/cypress.json",
+        "devServerTarget": "storybook:storybook"
+      },
+      "configurations": {
+        "ci": {
+          "devServerTarget": "storybook:storybook:ci"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/storybook-e2e/**/*.{js,ts}"]
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["storybook"]
+}

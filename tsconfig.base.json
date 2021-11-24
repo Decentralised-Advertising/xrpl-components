@@ -14,7 +14,12 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@xrpl-components/account-balance": [
+        "libs/components/account-balance/src/index.ts"
+      ],
+      "@xrpl-components/storybook": ["libs/storybook/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
