@@ -1,21 +1,21 @@
 {
-  "root": "libs/storybook",
-  "sourceRoot": "libs/storybook/src",
-  "projectType": "library",
+  "root": "apps/storybook",
+  "sourceRoot": "apps/storybook/src",
+  "projectType": "application",
   "tags": [],
   "targets": {
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["libs/storybook/**/*.{ts,tsx,js,jsx}"]
+        "lintFilePatterns": ["apps/storybook/**/*.{ts,tsx,js,jsx}"]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/storybook"],
+      "outputs": ["coverage/apps/storybook"],
       "options": {
-        "jestConfig": "libs/storybook/jest.config.js",
+        "jestConfig": "apps/storybook/jest.config.js",
         "passWithNoTests": true
       }
     },
@@ -25,7 +25,7 @@
         "uiFramework": "@storybook/react",
         "port": 4400,
         "config": {
-          "configFolder": "libs/storybook/.storybook"
+          "configFolder": "apps/storybook/.storybook"
         }
       },
       "configurations": {
@@ -39,15 +39,30 @@
       "outputs": ["{options.outputPath}"],
       "options": {
         "uiFramework": "@storybook/react",
-        "outputPath": "dist/storybook/storybook",
+        "outputPath": "dist/apps/storybook",
         "config": {
-          "configFolder": "libs/storybook/.storybook"
+          "configFolder": "apps/storybook/.storybook"
         }
       },
       "configurations": {
         "ci": {
           "quiet": true
         }
+      }
+    },
+    "build-for-deployment": {
+      "dependsOn": [
+        {
+          "target": "build",
+          "projects": "dependencies"
+        }
+      ],
+      "executor": "@nrwl/workspace:run-commands",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/storybook",
+        "parallel": false,
+        "commands": ["TAILWIND_MODE=build npx nx build-storybook storybook"]
       }
     }
   }

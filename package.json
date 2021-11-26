@@ -1,5 +1,6 @@
 {
   "name": "xrpl-components",
+  "private": true,
   "version": "0.0.0",
   "license": "MIT",
   "volta": {
@@ -10,11 +11,12 @@
   "scripts": {
     "start": "nx serve",
     "build": "nx build",
-    "test": "nx test"
+    "test": "nx test",
+    "storybook": "nx storybook storybook"
   },
-  "private": true,
   "dependencies": {
     "@nrwl/next": "13.2.2",
+    "@nrwl/nx-cloud": "^12.5.4",
     "core-js": "^3.6.5",
     "next": "12.0.0",
     "react": "17.0.2",
@@ -50,6 +52,7 @@
     "@typescript-eslint/parser": "~4.33.0",
     "babel-jest": "27.2.3",
     "babel-loader": "8.1.0",
+    "chromatic": "^6.0.6",
     "cypress": "^8.3.0",
     "eslint": "7.32.0",
     "eslint-config-next": "12.0.0",
