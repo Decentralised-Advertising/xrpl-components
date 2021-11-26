@@ -1,0 +1,42 @@
+{
+  "root": "libs/hooks/xrpl",
+  "sourceRoot": "libs/hooks/xrpl/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:package",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/hooks/xrpl",
+        "tsConfig": "libs/hooks/xrpl/tsconfig.lib.json",
+        "project": "libs/hooks/xrpl/package.json",
+        "entryFile": "libs/hooks/xrpl/src/index.ts",
+        "external": ["react/jsx-runtime"],
+        "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
+        "assets": [
+          {
+            "glob": "libs/hooks/xrpl/README.md",
+            "input": ".",
+            "output": "."
+          }
+        ]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/hooks/xrpl/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/hooks/xrpl"],
+      "options": {
+        "jestConfig": "libs/hooks/xrpl/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}
