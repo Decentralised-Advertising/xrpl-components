@@ -4,7 +4,7 @@
     "app": "apps/app",
     "app-e2e": "apps/app-e2e",
     "components-account-balance": "libs/components/account-balance",
-    "storybook": "libs/storybook",
+    "storybook": "apps/storybook",
     "storybook-e2e": "apps/storybook-e2e"
   }
 }

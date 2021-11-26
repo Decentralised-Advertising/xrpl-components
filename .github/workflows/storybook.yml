@@ -1,0 +1,144 @@
+name: Storybook
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.number || github.ref }}
+  cancel-in-progress: true
+
+env:
+  NX_CLOUD_DISTRIBUTED_EXECUTION: false
+  NX_VERBOSE_LOGGING: true
+
+jobs:
+  determine_if_affected:
+    runs-on: ubuntu-latest
+    name: Determine whether or not storybook is affected
+    outputs:
+      is_affected: ${{ steps.check_storybook_affected.outputs.is_affected }}
+    steps:
+      - uses: actions/checkout@v2
+        name: Checkout [Pull Request]
+        if: ${{ github.event_name == 'pull_request' }}
+        with:
+          # By default, PRs will be checked-out based on the Merge Commit, but we want the actual branch HEAD.
+          ref: ${{ github.event.pull_request.head.sha }}
+          # We need to fetch all branches and commits so that Nx affected has a base to compare against.
+          fetch-depth: 0
+
+      - uses: actions/checkout@v2
+        name: Checkout [main]
+        if: ${{ github.event_name != 'pull_request' }}
+        with:
+          # We need to fetch all branches and commits so that Nx affected has a base to compare against.
+          fetch-depth: 0
+
+      - name: Derive appropriate SHAs for base and head for `nx affected` commands
+        uses: nrwl/nx-set-shas@v2
+        with:
+          workflow-id: 'ci.yml'
+
+      - name: Install node and yarn based on the volta config in our package.json
+        uses: volta-cli/action@v1
+
+      - name: Get yarn cache directory path and node version for cache key
+        id: yarn-cache-dir-path
+        run: |
+          echo "::set-output name=dir::$(yarn cache dir)"
+          echo "::set-output name=node_version::$(node --version)"
+
+      - uses: actions/cache@v2
+        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-node-${{ steps.yarn-cache-dir-path.outputs.node_version }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-node-${{ steps.yarn-cache-dir-path.outputs.node_version }}-yarn-
+
+      - name: Install dependencies
+        # We don't need the postinstall scripts to run for this job
+        run: yarn --frozen-lockfile --ignore-scripts
+
+      - name: Check if storybook is affected
+        id: check_storybook_affected
+        run: |
+          IS_AFFECTED_STR=$(npx nx print-affected | jq '.projects | contains(["storybook"])')
+          IS_AFFECTED=$([[ $IS_AFFECTED_STR == 'true' ]] && echo 'true' || echo '')
+          echo "::set-output name=is_affected::$IS_AFFECTED"
+        shell: bash
+
+  storybook:
+    needs: [determine_if_affected]
+    runs-on: ubuntu-latest
+    if: ${{ needs.determine_if_affected.outputs.is_affected }}
+    name: Run e2e tests for storybook-e2e and deploy to Chromatic (if affected)
+    steps:
+      - uses: actions/checkout@v2
+        name: Checkout [Pull Request]
+        if: ${{ github.event_name == 'pull_request' }}
+        with:
+          # By default, PRs will be checked-out based on the Merge Commit, but we want the actual branch HEAD.
+          ref: ${{ github.event.pull_request.head.sha }}
+          # We need to fetch all branches and commits so that Nx affected has a base to compare against.
+          fetch-depth: 0
+
+      - uses: actions/checkout@v2
+        name: Checkout [main]
+        if: ${{ github.event_name != 'pull_request' }}
+        with:
+          # We need to fetch all branches and commits so that Nx affected has a base to compare against.
+          fetch-depth: 0
+
+      - name: Derive appropriate SHAs for base and head for `nx affected` commands
+        uses: nrwl/nx-set-shas@v2
+        with:
+          workflow-id: 'ci.yml'
+
+      - name: Install node and yarn based on the volta config in our package.json
+        uses: volta-cli/action@v1
+
+      - name: Get yarn cache directory path and node version for cache key
+        id: yarn-cache-dir-path
+        run: |
+          echo "::set-output name=dir::$(yarn cache dir)"
+          echo "::set-output name=node_version::$(node --version)"
+
+      - uses: actions/cache@v2
+        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-node-${{ steps.yarn-cache-dir-path.outputs.node_version }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-node-${{ steps.yarn-cache-dir-path.outputs.node_version }}-yarn-
+
+      - name: Install dependencies
+        run: yarn --frozen-lockfile
+
+      - name: Build storybook ready for deploying to Chromatic and running e2e tests
+        run: npx nx build-for-deployment storybook
+
+      # We push up to Chromatic before running the e2e tests, as it may be useful to have the remote playground
+      # available to you when troubleshooting e2e failures, for example.
+      - name: Push the built storybook instance to Chromatic
+        uses: chromaui/action@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          storybookBuildDir: dist/apps/storybook
+          exitZeroOnChanges: true
+          # See https://www.chromatic.com/docs/ci#github-squash-rebase-merge-and-the-master-branch
+          autoAcceptChanges: main
+
+      # - name: Run e2e tests for storybook-e2e if affected
+      #   run: npx nx e2e storybook-e2e --configuration ci
+
+      # - name: Store the e2e results (if any)
+      #   if: ${{ always() }}
+      #   uses: actions/upload-artifact@v2
+      #   with:
+      #     name: cypress
+      #     path: dist/cypress
