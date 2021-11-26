@@ -9,7 +9,7 @@ export function Index() {
    */
   return (
     <div className={styles.page}>
-      <AccountBalance></AccountBalance>
+      <AccountBalance account="rG1QQv2nh2gr7RCZ1P8YYcBUKCCN633jCn"></AccountBalance>
     </div>
   );
 }
