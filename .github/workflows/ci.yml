@@ -69,8 +69,8 @@ jobs:
         with:
           cmd1: npx nx affected --target=lint --parallel --maxParallel=3
           cmd2: npx nx affected --target=test --parallel --maxParallel=3 --ci --code-coverage
-          # storybook is built as part of the separate storybook.yml workflow, so we exclude relevant projects here
-          cmd3: npx nx affected --target=build --prod --parallel --maxParallel=3 --exclude storybook
+          # storybook is built as part of the separate storybook.yml workflow, Next.js apps are built on Vercel
+          cmd3: npx nx affected --target=build --prod --parallel --maxParallel=3 --exclude storybook,xrpl-components-demo
 
       - name: Stop all running agents for this CI run
         # It's important that we always run this step, otherwise in the case of any failures in preceding non-Nx steps, the agents will keep running and waste billable minutes
