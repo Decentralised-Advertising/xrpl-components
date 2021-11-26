@@ -1,1 +1,1 @@
-export * from './lib/components-account-balance';
+export * from './lib/account-balance';

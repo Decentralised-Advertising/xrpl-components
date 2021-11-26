@@ -1,6 +1,6 @@
 {
-  "root": "apps/app",
-  "sourceRoot": "apps/app",
+  "root": "apps/xrpl-components-demo",
+  "sourceRoot": "apps/xrpl-components-demo",
   "projectType": "application",
   "targets": {
     "build": {
@@ -8,8 +8,8 @@
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
-        "root": "apps/app",
-        "outputPath": "dist/apps/app"
+        "root": "apps/xrpl-components-demo",
+        "outputPath": "dist/apps/xrpl-components-demo"
       },
       "configurations": {
         "production": {}
@@ -18,12 +18,12 @@
     "serve": {
       "executor": "@nrwl/next:server",
       "options": {
-        "buildTarget": "app:build",
+        "buildTarget": "xrpl-components-demo:build",
         "dev": true
       },
       "configurations": {
         "production": {
-          "buildTarget": "app:build:production",
+          "buildTarget": "xrpl-components-demo:build:production",
           "dev": false
         }
       }
@@ -31,14 +31,14 @@
     "export": {
       "executor": "@nrwl/next:export",
       "options": {
-        "buildTarget": "app:build:production"
+        "buildTarget": "xrpl-components-demo:build:production"
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/app"],
+      "outputs": ["coverage/apps/xrpl-components-demo"],
       "options": {
-        "jestConfig": "apps/app/jest.config.js",
+        "jestConfig": "apps/xrpl-components-demo/jest.config.js",
         "passWithNoTests": true
       }
     },
@@ -46,7 +46,7 @@
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["apps/app/**/*.{ts,tsx,js,jsx}"]
+        "lintFilePatterns": ["apps/xrpl-components-demo/**/*.{ts,tsx,js,jsx}"]
       }
     }
   },
