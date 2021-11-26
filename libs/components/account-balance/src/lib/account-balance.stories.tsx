@@ -11,4 +11,6 @@ const Template: Story<AccountBalanceProps> = (args) => (
 );
 
 export const Primary = Template.bind({});
-Primary.args = {};
+Primary.args = {
+  account: 'rG1QQv2nh2gr7RCZ1P8YYcBUKCCN633jCn',
+};
