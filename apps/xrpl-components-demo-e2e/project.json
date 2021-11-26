@@ -1,12 +1,12 @@
 {
-  "root": "apps/app-e2e",
-  "sourceRoot": "apps/app-e2e/src",
+  "root": "apps/xrpl-components-demo-e2e",
+  "sourceRoot": "apps/xrpl-components-demo-e2e/src",
   "projectType": "application",
   "targets": {
     "e2e": {
       "executor": "@nrwl/cypress:cypress",
       "options": {
-        "cypressConfig": "apps/app-e2e/cypress.json",
+        "cypressConfig": "apps/xrpl-components-demo-e2e/cypress.json",
         "devServerTarget": "app:serve"
       },
       "configurations": {
@@ -19,10 +19,10 @@
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["apps/app-e2e/**/*.{js,ts}"]
+        "lintFilePatterns": ["apps/xrpl-components-demo-e2e/**/*.{js,ts}"]
       }
     }
   },
   "tags": [],
-  "implicitDependencies": ["app"]
+  "implicitDependencies": ["xrpl-components-demo"]
 }
