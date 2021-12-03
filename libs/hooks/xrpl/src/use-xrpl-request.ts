@@ -1,8 +1,8 @@
 import useSWR from 'swr';
-import { useXRPL } from './use-xrpl';
+import { useXRPLContext } from '.';
 
 export function useXRPLRequest(args: any) {
-  const { client } = useXRPL();
+  const { client } = useXRPLContext();
   const xrplClientRequestFetcher = () => {
     if (!client) {
       return null;
