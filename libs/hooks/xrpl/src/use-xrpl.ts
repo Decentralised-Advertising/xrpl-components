@@ -4,7 +4,7 @@ import { defaultNetworks, INetwork } from './default-networks';
 import { resolveXRPLClient } from './resolve-xrpl-client';
 
 export interface IUseXRPLConfig {
-  availableNetworks?: { name: string, server: string }[]
+  availableNetworks?: { name: string; server: string }[];
 }
 
 export interface IUseXRPL {
@@ -40,27 +40,27 @@ export function useXRPL({ availableNetworks }: IUseXRPLConfig = {}): IUseXRPL {
     const Client = resolveXRPLClient();
     const newClient: Client = new Client(network.server);
     newClient.on('connected', () => {
-      setIsConnecting(false)
-      setIsConnected(true)
+      setIsConnecting(false);
+      setIsConnected(true);
     });
     newClient.on('disconnected', () => setIsConnected(false));
     newClient.on('error', (errorCode: any, errorMessage: any) => {
       setError({ errorCode, errorMessage });
     });
-    await newClient.connect()
+    await newClient.connect();
     setClient(newClient);
-    setIsConnecting(true)
+    setIsConnecting(true);
     setConnectedNetwork(network);
   };
 
   const disconnect = async (client: Client) => {
-      // TODO: Determine the correct behaviour for disconnecting a client.
-      // await client.disconnect()
-  }
+    // TODO: Determine the correct behaviour for disconnecting a client.
+    // await client.disconnect()
+  };
 
   useEffect(() => {
     oldClient && disconnect(oldClient);
-  }, [oldClient])
+  }, [oldClient]);
 
   useEffect(() => {
     updateClient();
@@ -90,7 +90,7 @@ export function useXRPL({ availableNetworks }: IUseXRPLConfig = {}): IUseXRPL {
  */
 export function ignoreWebSocketDisconnect(error: Error): void {
   if (error.message === 'websocket was closed') {
-    return
+    return;
   }
-  throw error
+  throw error;
 }

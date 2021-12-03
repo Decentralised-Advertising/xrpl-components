@@ -10,10 +10,10 @@ export const defaultNetworks: INetwork[] = [
   },
   {
     name: 'testnet',
-    server: 'wss://s.altnet.rippletest.net'
+    server: 'wss://s.altnet.rippletest.net',
   },
   {
     name: 'devnet',
-    server: 'wss://s.devnet.rippletest.net'
-  }
+    server: 'wss://s.devnet.rippletest.net',
+  },
 ];
