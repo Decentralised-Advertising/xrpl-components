@@ -1,7 +1,4 @@
 {
   "name": "@xrpl-components/hooks/xrpl",
-  "version": "0.0.1",
-  "dependencies": {
-    "xrpl": "^2.0.2"
-  }
+  "version": "0.0.1"
 }

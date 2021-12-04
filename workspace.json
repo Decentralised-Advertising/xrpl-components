@@ -2,6 +2,7 @@
   "version": 2,
   "projects": {
     "components-account-balance": "libs/components/account-balance",
+    "components-xrpl-context-provider": "libs/components/xrpl-context-provider",
     "hooks-xrpl": "libs/hooks/xrpl",
     "storybook": "apps/storybook",
     "storybook-e2e": "apps/storybook-e2e",

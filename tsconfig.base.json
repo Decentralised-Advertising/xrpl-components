@@ -18,7 +18,10 @@
       "@xrpl-components/account-balance": [
         "libs/components/account-balance/src/index.ts"
       ],
-      "@xrpl-components/hooks/xrpl": ["libs/hooks/xrpl/src/index.ts"]
+      "@xrpl-components/hooks/xrpl": ["libs/hooks/xrpl/src/index.ts"],
+      "@xrpl-components/xrpl-context-provider": [
+        "libs/components/xrpl-context-provider/src/index.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]
