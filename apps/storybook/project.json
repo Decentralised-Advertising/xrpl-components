@@ -1,6 +1,6 @@
 {
   "root": "apps/storybook",
-  "sourceRoot": "apps/storybook/src",
+  "sourceRoot": "apps/storybook",
   "projectType": "application",
   "tags": [],
   "targets": {
