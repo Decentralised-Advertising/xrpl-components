@@ -24,7 +24,8 @@
           "e2e",
           "build-storybook"
         ],
-        "accessToken": "ZjVlOTJjMGMtNzBkOS00NTM0LTkxMzAtNjE5NmQ0MTNhOWM0fHJlYWQtd3JpdGU="
+        "accessToken": "ZjVlOTJjMGMtNzBkOS00NTM0LTkxMzAtNjE5NmQ0MTNhOWM0fHJlYWQtd3JpdGU=",
+        "runtimeCacheInputs": ["node -v", "echo $NODE_ENV"]
       }
     }
   },
