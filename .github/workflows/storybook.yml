@@ -124,7 +124,7 @@ jobs:
         run: yarn --frozen-lockfile
 
       - name: Build storybook ready for deploying to Chromatic and running e2e tests
-        run: npx nx build-storybook storybook
+        run: NODE_ENV=production npx nx build-storybook storybook
 
       # We push up to Chromatic before running the e2e tests, as it may be useful to have the remote playground
       # available to you when troubleshooting e2e failures, for example.
