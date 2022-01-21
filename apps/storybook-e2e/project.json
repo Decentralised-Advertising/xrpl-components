@@ -7,11 +7,11 @@
       "executor": "@nrwl/cypress:cypress",
       "options": {
         "cypressConfig": "apps/storybook-e2e/cypress.json",
-        "devServerTarget": "storybook:storybook"
+        "devServerTarget": "storybook:serve"
       },
       "configurations": {
-        "ci": {
-          "devServerTarget": "storybook:storybook:ci"
+        "production": {
+          "devServerTarget": "storybook:serve:production"
         }
       }
     },

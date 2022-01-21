@@ -24,7 +24,8 @@
           "e2e",
           "build-storybook"
         ],
-        "accessToken": "ZjVlOTJjMGMtNzBkOS00NTM0LTkxMzAtNjE5NmQ0MTNhOWM0fHJlYWQtd3JpdGU="
+        "accessToken": "ZjVlOTJjMGMtNzBkOS00NTM0LTkxMzAtNjE5NmQ0MTNhOWM0fHJlYWQtd3JpdGU=",
+        "runtimeCacheInputs": ["node -v", "echo $NODE_ENV"]
       }
     }
   },
@@ -39,7 +40,16 @@
   "generators": {
     "@nrwl/react": {
       "application": {
+        "style": "css",
+        "linter": "eslint",
         "babel": true
+      },
+      "component": {
+        "style": "css"
+      },
+      "library": {
+        "style": "css",
+        "linter": "eslint"
       }
     },
     "@nrwl/next": {

@@ -4,25 +4,6 @@
   "projectType": "library",
   "tags": [],
   "targets": {
-    "build": {
-      "executor": "@nrwl/web:package",
-      "outputs": ["{options.outputPath}"],
-      "options": {
-        "outputPath": "dist/libs/components/xrpl-context-provider",
-        "tsConfig": "libs/components/xrpl-context-provider/tsconfig.lib.json",
-        "project": "libs/components/xrpl-context-provider/package.json",
-        "entryFile": "libs/components/xrpl-context-provider/src/index.ts",
-        "external": ["react/jsx-runtime"],
-        "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
-        "assets": [
-          {
-            "glob": "libs/components/xrpl-context-provider/README.md",
-            "input": ".",
-            "output": "."
-          }
-        ]
-      }
-    },
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
