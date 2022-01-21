@@ -1,8 +1,39 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link
-  href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&display=swap"
+  href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Work+Sans:wght@400;500;600;700&display=swap"
   rel="stylesheet"
 />
 
-<script src="https://unpkg.com/xrpl@2.0.0/build/xrpl-latest-min.js"></script>
+<!-- Needs to be kept in sync with version in root package.json -->
+<script src="https://unpkg.com/xrpl@2.1.1/build/xrpl-latest-min.js"></script>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  // The class is added to the body by the storybook-dark-mode add-on
+  tailwind.config = {
+    darkMode: 'class',
+    content: ['../../../**/*.tsx'],
+  };
+</script>
+
+<!-- Ensure unstyled examples are at least legible in dark mode -->
+<style>
+  body.dark {
+    color: #ffffff;
+  }
+</style>
+
+<style>
+  @font-face {
+    font-family: 'currency_symbols';
+    font-style: normal;
+    font-weight: 400;
+    src: url(/fonts/currency_symbols.4a731eb3.eot);
+    src: url(/fonts/currency_symbols.4a731eb3.eot#iefix)
+        format('embedded-opentype'),
+      url(/fonts/currency_symbols.80215dce.ttf) format('truetype'),
+      url(/fonts/currency_symbols.4f81ed0c.woff) format('woff'),
+      url(/fonts/currency_symbols.88f15c0e.svg) format('svg');
+  }
+</style>

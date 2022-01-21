@@ -16140,7 +16140,7 @@ xmlchars@^2.2.0:
   resolved "https://registry.yarnpkg.com/xmlchars/-/xmlchars-2.2.0.tgz#060fe1bcb7f9c76fe2a17db86a9bc3ab894210cb"
   integrity sha512-JZnDKK8B0RCDw84FNdDAIpZK+JuJw+s7Lz8nksI7SIuU3UXJJslUthsi+uWBUYOwPFwW7W7PRLRfUKpxjtjFCw==
 
-xrpl@^2.0.2:
+xrpl@2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/xrpl/-/xrpl-2.1.1.tgz#c00a197dfcaed8e779fb4c728aa384b940093cbf"
   integrity sha512-s8qg5ll0m1WuPji+qLOO02uhk8tu12zA68vspwwabH2XH4kzzDnABxTeQQlZisjr+B1EBalmlt0yMI+Gv7fnbg==
