@@ -7,11 +7,11 @@
       "executor": "@nrwl/cypress:cypress",
       "options": {
         "cypressConfig": "apps/xrpl-components-demo-e2e/cypress.json",
-        "devServerTarget": "app:serve"
+        "devServerTarget": "xrpl-components-demo:serve"
       },
       "configurations": {
         "production": {
-          "devServerTarget": "app:serve:production"
+          "devServerTarget": "xrpl-components-demo:serve:production"
         }
       }
     },

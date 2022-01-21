@@ -1,6 +1,6 @@
 import { getGreeting } from '../support/app.po';
 
-describe('xrpl-components-demo', () => {
+describe('storybook', () => {
   beforeEach(() => cy.visit('/'));
 
   it('should display welcome message', () => {
@@ -8,6 +8,6 @@ describe('xrpl-components-demo', () => {
     cy.login('my-email@something.com', 'myPassword');
 
     // Function helper example, see `../support/app.po.ts` file
-    getGreeting().contains('Welcome xrpl-components-demo');
+    getGreeting().contains('Welcome storybook');
   });
 });

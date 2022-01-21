@@ -15,13 +15,13 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@xrpl-components/account-balance": [
+      "@xrpl-components/components/account-balance": [
         "libs/components/account-balance/src/index.ts"
       ],
-      "@xrpl-components/hooks/xrpl": ["libs/hooks/xrpl/src/index.ts"],
-      "@xrpl-components/xrpl-context-provider": [
+      "@xrpl-components/components/xrpl-context-provider": [
         "libs/components/xrpl-context-provider/src/index.ts"
-      ]
+      ],
+      "@xrpl-components/hooks/xrpl": ["libs/hooks/xrpl/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

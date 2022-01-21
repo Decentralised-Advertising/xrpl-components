@@ -11,14 +11,6 @@
         "lintFilePatterns": ["apps/storybook/**/*.{ts,tsx,js,jsx}"]
       }
     },
-    "test": {
-      "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/storybook"],
-      "options": {
-        "jestConfig": "apps/storybook/jest.config.js",
-        "passWithNoTests": true
-      }
-    },
     "storybook": {
       "executor": "@nrwl/storybook:storybook",
       "options": {
@@ -48,21 +40,6 @@
         "ci": {
           "quiet": true
         }
-      }
-    },
-    "build-for-deployment": {
-      "dependsOn": [
-        {
-          "target": "build",
-          "projects": "dependencies"
-        }
-      ],
-      "executor": "@nrwl/workspace:run-commands",
-      "outputs": ["{options.outputPath}"],
-      "options": {
-        "outputPath": "dist/apps/storybook",
-        "parallel": false,
-        "commands": ["TAILWIND_MODE=build npx nx build-storybook storybook"]
       }
     }
   }
