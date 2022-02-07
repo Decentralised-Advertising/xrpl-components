@@ -1,6 +1,6 @@
 module.exports = {
   displayName: 'hooks-xrpl',
-  preset: '../../../../../jest.preset.js',
+  preset: '../../../../jest.preset.js',
   transform: {
     '^.+\\.[tj]sx?$': [
       '@swc/jest',
@@ -8,5 +8,5 @@ module.exports = {
     ],
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  coverageDirectory: '../../../../../coverage/libs/hooks/xrpl',
+  coverageDirectory: '../../../../coverage/libs/hooks/xrpl',
 };
