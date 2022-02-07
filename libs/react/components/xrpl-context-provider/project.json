@@ -1,0 +1,45 @@
+{
+  "root": "libs/react/components/xrpl-context-provider",
+  "sourceRoot": "libs/react/components/xrpl-context-provider/src",
+  "projectType": "library",
+  "tags": ["xrpl-components-react"],
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:rollup",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/react/components/xrpl-context-provider",
+        "tsConfig": "libs/react/components/xrpl-context-provider/tsconfig.lib.json",
+        "project": "libs/react/components/xrpl-context-provider/package.json",
+        "entryFile": "libs/react/components/xrpl-context-provider/src/index.ts",
+        "external": ["react/jsx-runtime"],
+        "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
+        "compiler": "babel",
+        "assets": [
+          {
+            "glob": "libs/react/components/xrpl-context-provider/README.md",
+            "input": ".",
+            "output": "."
+          }
+        ]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/react/components/xrpl-context-provider/**/*.{ts,tsx,js,jsx}"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/react/components/xrpl-context-provider"],
+      "options": {
+        "jestConfig": "libs/react/components/xrpl-context-provider/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

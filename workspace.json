@@ -1,9 +1,10 @@
 {
   "version": 2,
   "projects": {
-    "components-account-balance": "libs/components/account-balance",
-    "components-xrpl-context-provider": "libs/components/xrpl-context-provider",
-    "hooks-xrpl": "libs/hooks/xrpl",
+    "react-components-account-balance": "libs/react/components/account-balance",
+    "react-components-xrpl-context-provider": "libs/react/components/xrpl-context-provider",
+    "react-hooks-xrpl": "libs/react/hooks/xrpl",
+    "react-npm-package": "libs/react/npm-package",
     "storybook": "apps/storybook",
     "storybook-e2e": "apps/storybook-e2e",
     "xrpl-components-demo": "apps/xrpl-components-demo",

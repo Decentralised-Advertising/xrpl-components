@@ -11,7 +11,9 @@
       "dependencies": "*",
       "devDependencies": "*"
     },
-    ".eslintrc.json": "*"
+    ".eslintrc.json": "*",
+    "tools/scripts/copy-built-libs.ts": ["react-npm-package"],
+    "tools/scripts/generate-package-json.ts": ["react-npm-package"]
   },
   "tasksRunnerOptions": {
     "default": {
