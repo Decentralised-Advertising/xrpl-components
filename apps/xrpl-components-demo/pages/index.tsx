@@ -1,5 +1,5 @@
-import { AccountBalance } from '@xrpl-components/components/account-balance';
-import { XRPLContextProvider } from '@xrpl-components/components/xrpl-context-provider';
+import { AccountBalance } from '@xrpl-components/react/components/account-balance';
+import { XRPLContextProvider } from '@xrpl-components/react/components/xrpl-context-provider';
 import styles from './index.module.css';
 
 export function Index() {
