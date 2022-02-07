@@ -1,0 +1,45 @@
+{
+  "root": "libs/react/components/account-balance",
+  "sourceRoot": "libs/react/components/account-balance/src",
+  "projectType": "library",
+  "tags": ["xrpl-components-react"],
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:rollup",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/react/components/account-balance",
+        "tsConfig": "libs/react/components/account-balance/tsconfig.lib.json",
+        "project": "libs/react/components/account-balance/package.json",
+        "entryFile": "libs/react/components/account-balance/src/index.ts",
+        "external": ["react/jsx-runtime"],
+        "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
+        "compiler": "babel",
+        "assets": [
+          {
+            "glob": "libs/react/components/account-balance/README.md",
+            "input": ".",
+            "output": "."
+          }
+        ]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/react/components/account-balance/**/*.{ts,tsx,js,jsx}"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/react/components/account-balance"],
+      "options": {
+        "jestConfig": "libs/react/components/account-balance/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

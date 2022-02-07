@@ -1,0 +1,41 @@
+{
+  "projectType": "library",
+  "root": "libs/react/npm-package",
+  "sourceRoot": "libs/react/npm-package/src",
+  "implicitDependencies": [
+    "react-components-account-balance",
+    "react-components-xrpl-context-provider",
+    "react-hooks-xrpl"
+  ],
+  "targets": {
+    "generate-package-json": {
+      "executor": "@nrwl/workspace:run-commands",
+      "outputs": ["dist/libs/react/npm-package"],
+      "options": {
+        "commands": [
+          "npx ts-node --project tools/tsconfig.tools.json tools/scripts/generate-package-json.ts"
+        ]
+      },
+      "configurations": {
+        "production": {}
+      }
+    },
+    "build": {
+      "executor": "@nrwl/workspace:run-commands",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/react/npm-package",
+        "parallel": false,
+        "commands": [
+          "npx rimraf dist/react-npm-package",
+          "npx nx generate-package-json react-npm-package",
+          "cp libs/react/npm-package/README.md dist/react-npm-package/",
+          "npx ts-node --project tools/tsconfig.tools.json tools/scripts/copy-built-libs.ts"
+        ]
+      },
+      "configurations": {
+        "production": {}
+      }
+    }
+  }
+}
