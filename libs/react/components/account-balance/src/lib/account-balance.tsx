@@ -71,7 +71,7 @@ interface AccountBalanceCurrencyProps {
 function AccountBalanceCurrency({
   unicodeSymbol,
   children,
-}: AccountBalanceCurrencyProps): JSX.Element {
+}: AccountBalanceCurrencyProps) {
   const currencyToDisplay = useMemo(() => {
     if (children.length !== 40) {
       return children;
@@ -88,7 +88,7 @@ function AccountBalanceCurrency({
   if (unicodeSymbol && currencyToDisplay === 'XRP') {
     return <></>;
   }
-  return <>{currencyToDisplay}</>;
+  return currencyToDisplay;
 }
 
 AccountBalanceCurrency.defaultProps = {

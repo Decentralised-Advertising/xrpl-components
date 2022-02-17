@@ -40,7 +40,7 @@ export function useXRPLBalances(
   };
   useEffect(() => {
     refreshBalances();
-  }, [address, client]);
+  }, [address, client, refreshBalances]);
   return {
     data,
     error,

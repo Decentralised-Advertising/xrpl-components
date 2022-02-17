@@ -21,7 +21,7 @@ export function useXRPL({ server, xrpl }: IUseXRPLConfig): IUseXRPL {
   const [isConnecting, setIsConnecting] = useState(false);
   const [client, setClient] = useState<Client | undefined>();
   const [oldClient, setOldClient] = useState<Client | undefined>();
-  const [error, setError] = useState<{} | null>(null);
+  const [error, setError] = useState<any | null>(null);
 
   const reconnect = async () => {
     if (!server) {
@@ -33,7 +33,7 @@ export function useXRPL({ server, xrpl }: IUseXRPLConfig): IUseXRPL {
     if (client) {
       setOldClient(client);
     }
-    let xrplApi = xrpl || resolveXRPL();
+    const xrplApi = xrpl || resolveXRPL();
     const newClient: Client = new xrplApi.Client(server);
     newClient.on('connected', () => {
       setIsConnecting(false);
@@ -66,7 +66,7 @@ export function useXRPL({ server, xrpl }: IUseXRPLConfig): IUseXRPL {
 
   useEffect(() => {
     reconnect();
-  }, [server]);
+  }, [server, reconnect]);
 
   return {
     /**
