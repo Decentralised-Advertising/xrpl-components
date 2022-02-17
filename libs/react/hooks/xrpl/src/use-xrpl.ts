@@ -3,7 +3,7 @@ import type { Client } from 'xrpl';
 import { resolveXRPL } from './resolve-xrpl-client';
 
 export interface IUseXRPLConfig {
-  server: string;
+  server?: string;
   xrpl?: { Client: typeof Client };
 }
 
