@@ -12,6 +12,7 @@ export interface IUseXRPL {
   isConnected: boolean;
   isConnecting: boolean;
   error: any;
+  reconnect: () => void;
 }
 
 export function useXRPL({ server, xrpl }: IUseXRPLConfig): IUseXRPL {
@@ -22,7 +23,7 @@ export function useXRPL({ server, xrpl }: IUseXRPLConfig): IUseXRPL {
   const [oldClient, setOldClient] = useState<Client | undefined>();
   const [error, setError] = useState<{} | null>(null);
 
-  const updateClient = async () => {
+  const reconnect = async () => {
     if (!server) {
       return;
     }
@@ -50,7 +51,7 @@ export function useXRPL({ server, xrpl }: IUseXRPLConfig): IUseXRPL {
     newClient.connect().catch((err) => {
       setError(err);
       setIsConnecting(false);
-      setClient(undefined)
+      setClient(undefined);
     });
   };
 
@@ -64,7 +65,7 @@ export function useXRPL({ server, xrpl }: IUseXRPLConfig): IUseXRPL {
   }, [oldClient]);
 
   useEffect(() => {
-    updateClient();
+    reconnect();
   }, [server]);
 
   return {
@@ -75,6 +76,7 @@ export function useXRPL({ server, xrpl }: IUseXRPLConfig): IUseXRPL {
     isConnected,
     isConnecting,
     error,
+    reconnect,
   };
 }
 

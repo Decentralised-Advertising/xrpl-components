@@ -23,7 +23,7 @@ const ExampleContextConsumer = ({ server }: { server: string }) => {
   useEffect(() => {
     async function updateLedgerIndex() {
       if (!client) {
-        setLedgerIndex(null)
+        setLedgerIndex(null);
         return;
       }
       const l = await client.getLedgerIndex();

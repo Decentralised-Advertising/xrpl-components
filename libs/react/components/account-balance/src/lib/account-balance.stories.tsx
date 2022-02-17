@@ -39,7 +39,9 @@ const UnstyledTemplate: Story<AccountBalanceProps & { server: string }> = (
 
 export const Unstyled = UnstyledTemplate.bind({});
 
-const TailwindTemplate: Story<AccountBalanceProps & { server: string }> = (args) => (
+const TailwindTemplate: Story<AccountBalanceProps & { server: string }> = (
+  args
+) => (
   <XRPLContextProvider server={args.server}>
     <AccountBalance {...args}>
       {({ isLoading, value, currency }) => {

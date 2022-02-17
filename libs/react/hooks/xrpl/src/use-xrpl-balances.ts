@@ -13,28 +13,29 @@ export function useXRPLBalances(
 ) {
   const { client } = useXRPLContext();
   const [data, setData] = useState<
-    {
-      value: string;
-      currency: string;
-      issuer?: string | undefined;
-    }[] | null
+    | {
+        value: string;
+        currency: string;
+        issuer?: string | undefined;
+      }[]
+    | null
   >(null);
   const [error, setError] = useState(null);
   const refreshBalances = () => {
     if (!client) {
       return;
     }
-    setData(null)
-    setError(null)
+    setData(null);
+    setError(null);
     client
       .getBalances(address, options)
       .then((data) => {
-        setData(data)
-        setError(null)
+        setData(data);
+        setError(null);
       })
       .catch((err) => {
-        setError(err)
-        setData(null)
+        setError(err);
+        setData(null);
       });
   };
   useEffect(() => {
