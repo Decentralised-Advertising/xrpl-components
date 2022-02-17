@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Story, Meta } from '@storybook/react';
 import { useXRPLContext } from '@xrpl-components/react/hooks/xrpl';
 import { XRPLContextProvider } from './xrpl-context-provider';
-import { defaultNetworks } from 'libs/react/hooks/xrpl/src/default-networks';
+import { defaultNetworks } from '@xrpl-components/react/hooks/xrpl';
 
 export default {
   component: XRPLContextProvider,

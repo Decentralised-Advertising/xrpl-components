@@ -1,6 +1,6 @@
 import { Meta, Story } from '@storybook/react';
 import { XRPLContextProvider } from '@xrpl-components/react/components/xrpl-context-provider';
-import { defaultNetworks } from 'libs/react/hooks/xrpl/src/default-networks';
+import { defaultNetworks } from '@xrpl-components/react/hooks/xrpl';
 import { AccountBalance, AccountBalanceProps } from './account-balance';
 
 export default {

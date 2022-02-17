@@ -1,6 +1,6 @@
 import { AccountBalance } from '@xrpl-components/react/components/account-balance';
 import { XRPLContextProvider } from '@xrpl-components/react/components/xrpl-context-provider';
-import { defaultNetworks } from 'libs/react/hooks/xrpl/src/default-networks';
+import { defaultNetworks } from '@xrpl-components/react/hooks/xrpl';
 import styles from './index.module.css';
 
 export function Index() {
