@@ -10,7 +10,9 @@ export interface XRPLContextProviderProps extends IUseXRPLConfig {
 }
 
 export function XRPLContextProvider(props: XRPLContextProviderProps) {
-  const { client, isConnected, isConnecting, error } = useXRPL({ ...props });
+  const { client, isConnected, isConnecting, error, reconnect } = useXRPL({
+    ...props,
+  });
   return (
     <XRPLContext.Provider
       value={{
@@ -18,6 +20,7 @@ export function XRPLContextProvider(props: XRPLContextProviderProps) {
         isConnected,
         isConnecting,
         error,
+        reconnect,
       }}
     >
       {props.children}
