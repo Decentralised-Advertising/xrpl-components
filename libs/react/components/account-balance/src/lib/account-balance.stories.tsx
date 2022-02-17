@@ -1,5 +1,6 @@
 import { Meta, Story } from '@storybook/react';
 import { XRPLContextProvider } from '@xrpl-components/react/components/xrpl-context-provider';
+import { defaultNetworks } from 'libs/react/hooks/xrpl/src/default-networks';
 import { AccountBalance, AccountBalanceProps } from './account-balance';
 
 export default {
@@ -8,10 +9,19 @@ export default {
   args: {
     account: 'rG1QQv2nh2gr7RCZ1P8YYcBUKCCN633jCn',
   },
+  argTypes: {
+    server: {
+      options: defaultNetworks.map((n) => n.server),
+      control: { type: 'radio' },
+      defaultValue: defaultNetworks[0].server,
+    },
+  },
 } as Meta;
 
-const UnstyledTemplate: Story<AccountBalanceProps> = (args) => (
-  <XRPLContextProvider>
+const UnstyledTemplate: Story<AccountBalanceProps & { server: string }> = (
+  args
+) => (
+  <XRPLContextProvider server={args.server}>
     <AccountBalance {...args}>
       {({ isLoading, value, currency }) =>
         isLoading ? (
@@ -29,8 +39,8 @@ const UnstyledTemplate: Story<AccountBalanceProps> = (args) => (
 
 export const Unstyled = UnstyledTemplate.bind({});
 
-const TailwindTemplate: Story<AccountBalanceProps> = (args) => (
-  <XRPLContextProvider>
+const TailwindTemplate: Story<AccountBalanceProps & { server: string }> = (args) => (
+  <XRPLContextProvider server={args.server}>
     <AccountBalance {...args}>
       {({ isLoading, value, currency }) => {
         return (

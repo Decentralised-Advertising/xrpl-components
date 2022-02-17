@@ -1,28 +1,21 @@
 import {
-  INetwork,
   XRPLContext,
   useXRPL,
+  IUseXRPLConfig,
 } from '@xrpl-components/react/hooks/xrpl';
 
 /* eslint-disable-next-line */
-export interface XRPLContextProviderProps {
+export interface XRPLContextProviderProps extends IUseXRPLConfig {
   children: any;
-  availableNetworks?: INetwork[];
 }
 
-export function XRPLContextProvider({
-  children,
-  availableNetworks: availableNetworksConfig,
-}: XRPLContextProviderProps) {
+export function XRPLContextProvider(props: XRPLContextProviderProps) {
   const {
     client,
     isConnected,
     isConnecting,
     error,
-    network,
-    setNetwork,
-    availableNetworks,
-  } = useXRPL({ availableNetworks: availableNetworksConfig });
+  } = useXRPL({ ...props });
   return (
     <XRPLContext.Provider
       value={{
@@ -30,12 +23,9 @@ export function XRPLContextProvider({
         isConnected,
         isConnecting,
         error,
-        network,
-        setNetwork,
-        availableNetworks,
       }}
     >
-      {children}
+      {props.children}
     </XRPLContext.Provider>
   );
 }

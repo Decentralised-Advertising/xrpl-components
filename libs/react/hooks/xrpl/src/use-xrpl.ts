@@ -1,56 +1,57 @@
 import { useEffect, useState } from 'react';
 import type { Client } from 'xrpl';
-import { defaultNetworks, INetwork } from './default-networks';
-import { resolveXRPLClient } from './resolve-xrpl-client';
+import { resolveXRPL } from './resolve-xrpl-client';
 
 export interface IUseXRPLConfig {
-  availableNetworks?: { name: string; server: string }[];
+  server: string;
+  xrpl?: { Client: typeof Client };
 }
 
 export interface IUseXRPL {
-  client?: Client;
+  client: Client | undefined;
   isConnected: boolean;
   isConnecting: boolean;
   error: any;
-  network: INetwork;
-  setNetwork: (network: INetwork) => void;
-  availableNetworks: INetwork[];
 }
 
-export function useXRPL({ availableNetworks }: IUseXRPLConfig = {}): IUseXRPL {
-  availableNetworks = availableNetworks || defaultNetworks;
-  const [network, setNetwork] = useState<INetwork>(availableNetworks[0]);
-  const [connectedNetwork, setConnectedNetwork] = useState<INetwork>();
+export function useXRPL({ server, xrpl }: IUseXRPLConfig): IUseXRPL {
+  const [connectedServer, setConnectedServer] = useState<string>();
   const [isConnected, setIsConnected] = useState(false);
   const [isConnecting, setIsConnecting] = useState(false);
   const [client, setClient] = useState<Client | undefined>();
   const [oldClient, setOldClient] = useState<Client | undefined>();
-  const [error, setError] = useState({});
+  const [error, setError] = useState<{} | null>(null);
 
   const updateClient = async () => {
-    if (!network) {
+    if (!server) {
       return;
     }
-    if (connectedNetwork?.name === network.name && isConnected) {
+    if (server === connectedServer && isConnected) {
       return;
     }
     if (client) {
       setOldClient(client);
     }
-    const Client = resolveXRPLClient();
-    const newClient: Client = new Client(network.server);
+    let xrplApi = xrpl || resolveXRPL();
+    const newClient: Client = new xrplApi.Client(server);
     newClient.on('connected', () => {
       setIsConnecting(false);
       setIsConnected(true);
+      setClient(newClient);
+      setConnectedServer(server);
     });
     newClient.on('disconnected', () => setIsConnected(false));
     newClient.on('error', (errorCode: any, errorMessage: any) => {
       setError({ errorCode, errorMessage });
     });
-    await newClient.connect();
-    setClient(newClient);
     setIsConnecting(true);
-    setConnectedNetwork(network);
+    setIsConnected(false);
+    setError(false);
+    newClient.connect().catch((err) => {
+      setError(err);
+      setIsConnecting(false);
+      setClient(undefined)
+    });
   };
 
   const disconnect = async (client: Client) => {
@@ -64,7 +65,7 @@ export function useXRPL({ availableNetworks }: IUseXRPLConfig = {}): IUseXRPL {
 
   useEffect(() => {
     updateClient();
-  }, [network, connectedNetwork, availableNetworks]);
+  }, [server]);
 
   return {
     /**
@@ -74,9 +75,6 @@ export function useXRPL({ availableNetworks }: IUseXRPLConfig = {}): IUseXRPL {
     isConnected,
     isConnecting,
     error,
-    network,
-    setNetwork,
-    availableNetworks,
   };
 }
 
