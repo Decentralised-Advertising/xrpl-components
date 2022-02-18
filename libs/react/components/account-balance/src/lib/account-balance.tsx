@@ -9,6 +9,7 @@ export interface AccountBalanceProps {
     isLoading: boolean;
     value: string;
     currency: string;
+    error: any;
   }) => JSX.Element;
 }
 
@@ -22,30 +23,14 @@ export function AccountBalance({
   if (currency !== 'XRP' && !issuer) {
     throw new Error('An issuer must be provided for a non-XRP currency');
   }
-
-  const currencyToDisplay = useMemo(() => {
-    if (currency.length !== 40) {
-      return currency;
-    }
-    // Split the currency into two digit character codes and convert them to characters
-    const currencyChars = currency.match(/.{2}/g);
-    if (!currencyChars) {
-      return currency;
-    }
-    return currencyChars
-      .map((charCode) => String.fromCharCode(parseInt(charCode, 16)))
-      .join('');
-  }, [currency]);
-
   const { data, error } = useXRPLBalances(account);
 
-  // TODO: More comprehensive error handling
   if (error) {
-    return <div>Error: {JSON.stringify(error)}</div>;
+    return children({ isLoading: false, value: '0', currency, error });
   }
 
   if (!data) {
-    return children({ isLoading: true, value: '', currency: '' });
+    return children({ isLoading: true, value: '0', currency, error: null });
   }
 
   const { value } = data?.find((balance) => {
@@ -55,7 +40,7 @@ export function AccountBalance({
     return balance.currency === currency && balance.issuer === issuer;
   }) || { value: '', currency };
 
-  return children({ isLoading: false, value, currency: currencyToDisplay });
+  return children({ isLoading: false, value, currency, error: null });
 }
 
 AccountBalance.Value = AccountBalanceValue;
@@ -80,17 +65,30 @@ AccountBalanceValue.defaultProps = {
 
 interface AccountBalanceCurrencyProps {
   unicodeSymbol: boolean;
-  children: React.ReactNode;
+  children: string;
 }
 
 function AccountBalanceCurrency({
   unicodeSymbol,
   children,
 }: AccountBalanceCurrencyProps): JSX.Element {
-  if (unicodeSymbol && children === 'XRP') {
+  const currencyToDisplay = useMemo(() => {
+    if (children.length !== 40) {
+      return children;
+    }
+    // Split the currency into two digit character codes and convert them to characters
+    const currencyChars = children.match(/.{2}/g);
+    if (!currencyChars) {
+      return children;
+    }
+    return currencyChars
+      .map((charCode) => String.fromCharCode(parseInt(charCode, 16)))
+      .join('');
+  }, [children]);
+  if (unicodeSymbol && currencyToDisplay === 'XRP') {
     return <></>;
   }
-  return <>{children}</>;
+  return <>{currencyToDisplay}</>;
 }
 
 AccountBalanceCurrency.defaultProps = {

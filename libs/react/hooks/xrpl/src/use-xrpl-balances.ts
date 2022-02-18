@@ -1,4 +1,4 @@
-import useSWR from 'swr';
+import { useEffect, useState } from 'react';
 import type { LedgerIndex } from 'xrpl/dist/npm/models/common';
 import { useXRPLContext } from '.';
 
@@ -12,11 +12,38 @@ export function useXRPLBalances(
   }
 ) {
   const { client } = useXRPLContext();
-  const fetcher = () => {
+  const [data, setData] = useState<
+    | {
+        value: string;
+        currency: string;
+        issuer?: string | undefined;
+      }[]
+    | null
+  >(null);
+  const [error, setError] = useState(null);
+  const refreshBalances = () => {
     if (!client) {
-      return null;
+      return;
     }
-    return client.getBalances(address, options);
+    setData(null);
+    setError(null);
+    client
+      .getBalances(address, options)
+      .then((data) => {
+        setData(data);
+        setError(null);
+      })
+      .catch((err) => {
+        setError(err);
+        setData(null);
+      });
   };
-  return useSWR(client ? JSON.stringify([address, options]) : null, fetcher);
+  useEffect(() => {
+    refreshBalances();
+  }, [address, client, refreshBalances]);
+  return {
+    data,
+    error,
+    refreshBalances,
+  };
 }
