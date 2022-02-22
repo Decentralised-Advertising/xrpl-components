@@ -6,3 +6,4 @@ export { useXRPLBalances } from './use-xrpl-balances';
 export { useXRPLContext, XRPLContext } from './use-xrpl-context';
 export { useXRPLRequest } from './use-xrpl-request';
 export * as utils from './utils';
+export { useXRPLGlobal } from './use-xrpl-global';

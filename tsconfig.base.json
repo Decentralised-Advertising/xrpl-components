@@ -18,6 +18,9 @@
       "@xrpl-components/react/components/account-balance": [
         "libs/react/components/account-balance/src/index.ts"
       ],
+      "@xrpl-components/react/components/address-input": [
+        "libs/react/components/address-input/src/index.ts"
+      ],
       "@xrpl-components/react/components/xrpl-context-provider": [
         "libs/react/components/xrpl-context-provider/src/index.ts"
       ],

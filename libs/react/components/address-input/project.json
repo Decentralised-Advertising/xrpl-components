@@ -1,0 +1,45 @@
+{
+  "root": "libs/react/components/address-input",
+  "sourceRoot": "libs/react/components/address-input/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:rollup",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/react/components/address-input",
+        "tsConfig": "libs/react/components/address-input/tsconfig.lib.json",
+        "project": "libs/react/components/address-input/package.json",
+        "entryFile": "libs/react/components/address-input/src/index.ts",
+        "external": ["react/jsx-runtime"],
+        "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
+        "compiler": "babel",
+        "assets": [
+          {
+            "glob": "libs/react/components/address-input/README.md",
+            "input": ".",
+            "output": "."
+          }
+        ]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/react/components/address-input/**/*.{ts,tsx,js,jsx}"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/react/components/address-input"],
+      "options": {
+        "jestConfig": "libs/react/components/address-input/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}
