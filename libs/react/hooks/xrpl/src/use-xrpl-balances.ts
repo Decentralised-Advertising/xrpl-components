@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import type { LedgerIndex } from 'xrpl/dist/npm/models/common';
-import { useXRPLContext } from '.';
+import { useXRPLContext } from './use-xrpl-context';
 
 export function useXRPLBalances(
   address: string,
