@@ -13,27 +13,22 @@ concurrency:
 jobs:
   main:
     name: Nx Cloud - Main Job
-    uses: jameshenry/nx-cloud/.github/workflows/nx-cloud-main.yml@wip
+    uses: jameshenry/ci/.github/workflows/nx-cloud-main.yml@wip
     with:
       install-command: yarn --frozen-lockfile --ignore-scripts
       # storybook is built as part of the separate storybook.yml workflow, Next.js apps are built on Vercel
       # so that's why we exclude them in the build target
-      commands: |
-        {
-          "parallel_commands": [
-            "npx nx workspace-lint",
-            "npx nx format:check"
-          ],
-          "parallel_commands_on_agents": [
-            "npx nx affected --target=lint --parallel=3",
-            "npx nx affected --target=test --parallel=3 --ci --code-coverage",
-            "npx nx affected --target=build --prod --parallel --maxParallel=3 --exclude storybook,xrpl-components-demo"
-          ]
-        }
+      parallel-commands: |
+        npx nx workspace-lint
+        npx nx format:check
+      parallel-commands-on-agents: |
+        npx nx affected --target=lint --parallel=3
+        npx nx affected --target=test --parallel=3 --ci --code-coverage
+        npx nx affected --target=build --prod --parallel --maxParallel=3 --exclude storybook,xrpl-components-demo
 
   agents:
     name: Nx Cloud - Agents
-    uses: jameshenry/nx-cloud/.github/workflows/nx-cloud-agents.yml@wip
+    uses: jameshenry/ci/.github/workflows/nx-cloud-agents.yml@wip
     with:
       number-of-agents: 3
       install-command: yarn --frozen-lockfile --ignore-scripts
