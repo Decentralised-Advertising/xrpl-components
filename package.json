@@ -16,6 +16,7 @@
     "format": "nx format"
   },
   "dependencies": {
+    "@heroicons/react": "^1.0.6",
     "@nrwl/next": "13.9.4",
     "@reach/skip-nav": "^0.16.0",
     "core-js": "^3.6.5",
