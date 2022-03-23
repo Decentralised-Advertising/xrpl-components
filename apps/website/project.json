@@ -16,6 +16,13 @@
       }
     },
     "serve": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "command": "npx next dev",
+        "cwd": "apps/website"
+      }
+    },
+    "old-serve": {
       "executor": "@nrwl/next:server",
       "options": {
         "buildTarget": "website:build",
