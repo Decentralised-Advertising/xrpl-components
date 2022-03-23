@@ -8,6 +8,8 @@
     "react-npm-package": "libs/react/npm-package",
     "storybook": "apps/storybook",
     "storybook-e2e": "apps/storybook-e2e",
+    "website": "apps/website",
+    "website-e2e": "apps/website-e2e",
     "xrpl-components-demo": "apps/xrpl-components-demo",
     "xrpl-components-demo-e2e": "apps/xrpl-components-demo-e2e"
   }
