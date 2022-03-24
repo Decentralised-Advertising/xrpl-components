@@ -23,7 +23,7 @@ const TITLE_WITH_TRANSLATIONS = {
 const theme = {
   projectLink: 'https://github.com/decentralised-advertising/xrpl-components',
   docsRepositoryBase:
-    'https://github.com/decentralised-advertising/xrpl-components',
+    'https://github.com/decentralised-advertising/xrpl-components/tree/main/apps/website/pages',
   titleSuffix: ' – XRPL Components',
   search: true,
   unstable_flexsearch: true,

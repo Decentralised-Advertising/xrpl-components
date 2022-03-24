@@ -1,6 +1,6 @@
 {
   "index": {
-    "title": "Introduction",
+    "title": "Home",
     "type": "page",
     "hidden": true
   },
@@ -11,12 +11,5 @@
   "examples": {
     "title": "Examples",
     "type": "page"
-  },
-  "blog": {
-    "title": "Blog",
-    "type": "page",
-    "theme": {
-      "sidebar": false
-    }
   }
 }

@@ -13421,10 +13421,10 @@ next@12.1.0:
     "@next/swc-win32-ia32-msvc" "12.1.0"
     "@next/swc-win32-x64-msvc" "12.1.0"
 
-nextra-theme-docs@2.0.0-alpha.44:
-  version "2.0.0-alpha.44"
-  resolved "https://registry.yarnpkg.com/nextra-theme-docs/-/nextra-theme-docs-2.0.0-alpha.44.tgz#ec26828a536521c2353c77fbeeff33ea4d591e89"
-  integrity sha512-KeLaaQNOgkS4TWr38T7CQ7CXP5A8zgJuadmzl/uMNkq9YWS5XPIzicvmd0ltr+fCdxzBqVFAIeIX54XB/qUlYA==
+nextra-theme-docs@2.0.0-alpha.46:
+  version "2.0.0-alpha.46"
+  resolved "https://registry.yarnpkg.com/nextra-theme-docs/-/nextra-theme-docs-2.0.0-alpha.46.tgz#dfbce86f79f98b4211b63aff422324ed580c9b6e"
+  integrity sha512-I7JK/YggII841z2X//qLrrqZ+ji2I23xOg++2+lkKjb0T+ib9QIVYYdaSwGqEOcU0epNK/qev0VwA8sVCLqVYg==
   dependencies:
     "@headlessui/react" "^1.5.0"
     "@mdx-js/react" "^2.0.0"
@@ -13439,10 +13439,10 @@ nextra-theme-docs@2.0.0-alpha.44:
     parse-git-url "^1.0.1"
     title "^3.4.2"
 
-nextra@2.0.0-alpha.44:
-  version "2.0.0-alpha.44"
-  resolved "https://registry.yarnpkg.com/nextra/-/nextra-2.0.0-alpha.44.tgz#d28f513f55d39b5fc0349b01d783ccc179467da8"
-  integrity sha512-PZBQAHlrZbf4sg2XEUvqe+SoI5XU/Ui4Z/9ENmGFRCrtKd3oy9Ea9uMrS6V0s8e+cwOjlKCW4TRoG24aORefog==
+nextra@2.0.0-alpha.46:
+  version "2.0.0-alpha.46"
+  resolved "https://registry.yarnpkg.com/nextra/-/nextra-2.0.0-alpha.46.tgz#3491e8a3eb31d2dc875bf325e4e38b6462b08e95"
+  integrity sha512-hmTejOqNhNWJWw/lsC4nytgxTYfuCmVo8fm4slN9FVYJY49SdwlqqBOZvy/6yUmpaN1DsNAyyZwtWZatbdx07Q==
   dependencies:
     "@mdx-js/mdx" "^2.0.0"
     github-slugger "^1.4.0"
@@ -13450,7 +13450,7 @@ nextra@2.0.0-alpha.44:
     gray-matter "^4.0.3"
     rehype-pretty-code "^0.1.0"
     remark-gfm "^3.0.1"
-    shiki "0.10.0"
+    shiki "0.10.1"
     slash "^3.0.0"
 
 nice-try@^1.0.4:
@@ -16182,10 +16182,10 @@ shebang-regex@^3.0.0:
   resolved "https://registry.yarnpkg.com/shebang-regex/-/shebang-regex-3.0.0.tgz#ae16f1644d873ecad843b0307b143362d4c42172"
   integrity sha512-7++dFhtcx3353uBaq8DDR4NuxBetBzC7ZQOhmTQInHEd6bSrXdiEyzCvG07Z44UYdLShWUyXt5M/yhz8ekcb1A==
 
-shiki@0.10.0:
-  version "0.10.0"
-  resolved "https://registry.yarnpkg.com/shiki/-/shiki-0.10.0.tgz#85f21ecfa95b377ff64db6c71442c22c220e9540"
-  integrity sha512-iczxaIYeBFHTFrQPb9DVy2SKgYxC4Wo7Iucm7C17cCh2Ge/refnvHscUOxM85u57MfLoNOtjoEFUWt9gBexblA==
+shiki@0.10.1:
+  version "0.10.1"
+  resolved "https://registry.yarnpkg.com/shiki/-/shiki-0.10.1.tgz#6f9a16205a823b56c072d0f1a0bcd0f2646bef14"
+  integrity sha512-VsY7QJVzU51j5o1+DguUd+6vmCmZ5v/6gYu4vyYAhzjuNQU6P/vmSy4uQaOhvje031qQMiW0d2BwgMH52vqMng==
   dependencies:
     jsonc-parser "^3.0.0"
     vscode-oniguruma "^1.6.1"

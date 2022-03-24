@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export default function Hero() {
   return (
-    <div className="bg-white dark:bg-dark">
+    <div className="">
       <div className="relative overflow-hidden">
         <div className="relative pt-6 pb-16 sm:pb-14">
           <div className="mt-16 mx-auto max-w-7xl px-4 sm:mt-24 sm:px-6">
@@ -53,8 +53,8 @@ export default function Hero() {
       </div>
       <div className="bg-white dark:bg-dark">
         <div className="max-w-7xl mx-auto pb-24 px-4 pt-12 sm:px-6 lg:px-8">
-          <h2 className="text-center text-gray-400 text-sm font-semibold uppercase tracking-wide">
-            Developed by Decentralised Advertising Ltd. Proudly supported by:
+          <h2 className="text-center text-gray-400 !text-sm font-semibold uppercase tracking-wide">
+            Developed by Decentralised Advertising Ltd and Proudly supported by:
           </h2>
           <div className="mt-8 grid grid-cols-3 gap-8">
             <div className="col-span-1 flex justify-center items-center">
