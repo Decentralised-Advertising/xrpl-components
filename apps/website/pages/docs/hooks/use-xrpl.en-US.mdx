@@ -1,0 +1,13 @@
+# useXRPL()
+
+```js
+import { useXRPL } from '@xrpl-components/react/hooks';
+
+export function YourComponent() {
+  const { client, isConnected, isConnecting, error, reconnect } = useXRPL({
+    // options
+  });
+
+  return <div>{/* ... */}</div>;
+}
+```

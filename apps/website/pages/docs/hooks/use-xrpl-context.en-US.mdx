@@ -1,0 +1,13 @@
+# useXRPLContext()
+
+```js
+import { useXRPLContext } from '@xrpl-components/react/hooks';
+
+export function YourComponent() {
+  const { client, isConnected, isConnecting, error, reconnect } = useXRPLContext({
+    // options
+  });
+
+  return <div>{/* ... */}</div>;
+}
+```

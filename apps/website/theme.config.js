@@ -20,10 +20,6 @@ const TITLE_WITH_TRANSLATIONS = {
     'Headless Components and Hooks for building React applications on the XRP Ledger',
 };
 
-const FEEDBACK_LINK_WITH_TRANSLATIONS = {
-  'en-US': 'Question? Give us feedback →',
-};
-
 const theme = {
   projectLink: 'https://github.com/decentralised-advertising/xrpl-components',
   docsRepositoryBase:
@@ -32,14 +28,6 @@ const theme = {
   search: true,
   unstable_flexsearch: true,
   floatTOC: true,
-  feedbackLink: () => {
-    const { locale } = useRouter();
-    return (
-      FEEDBACK_LINK_WITH_TRANSLATIONS[locale] ||
-      FEEDBACK_LINK_WITH_TRANSLATIONS['en-US']
-    );
-  },
-  feedbackLabels: 'feedback',
   logo: () => {
     const { locale } = useRouter();
     return (
@@ -134,21 +122,9 @@ const theme = {
           <span>
             &copy; 2022 Decentralised Advertising Ltd. All rights reserved.
           </span>
-          //   <a
-          //     href="https://vercel.com/?utm_source=swr"
-          //     target="_blank"
-          //     rel="noopener noreferrer"
-          //     className="inline-flex items-center no-underline text-current font-semibold"
-          //   >
-          //     <span className="mr-1">Powered by</span>
-          //     <span>
-          //       <Vercel />
-          //     </span>
-          //   </a>
         );
     }
   },
-  i18n: [{ locale: 'en-US', text: 'English' }],
 };
 
 export default theme;
