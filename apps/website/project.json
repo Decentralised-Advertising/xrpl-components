@@ -4,15 +4,10 @@
   "projectType": "application",
   "targets": {
     "build": {
-      "executor": "@nrwl/next:build",
-      "outputs": ["{options.outputPath}"],
-      "defaultConfiguration": "production",
+      "executor": "@nrwl/workspace:run-commands",
       "options": {
-        "root": "apps/website",
-        "outputPath": "dist/apps/website"
-      },
-      "configurations": {
-        "production": {}
+        "command": "npx next build",
+        "cwd": "apps/website"
       }
     },
     "serve": {
@@ -20,25 +15,6 @@
       "options": {
         "command": "npx next dev",
         "cwd": "apps/website"
-      }
-    },
-    "old-serve": {
-      "executor": "@nrwl/next:server",
-      "options": {
-        "buildTarget": "website:build",
-        "dev": true
-      },
-      "configurations": {
-        "production": {
-          "buildTarget": "website:build:production",
-          "dev": false
-        }
-      }
-    },
-    "export": {
-      "executor": "@nrwl/next:export",
-      "options": {
-        "buildTarget": "website:build:production"
       }
     },
     "lint": {
