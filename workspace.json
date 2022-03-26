@@ -3,6 +3,7 @@
   "projects": {
     "react-components-account-balance": "libs/react/components/account-balance",
     "react-components-address-input": "libs/react/components/address-input",
+    "react-components-amount-input": "libs/react/components/amount-input",
     "react-components-xrpl-context-provider": "libs/react/components/xrpl-context-provider",
     "react-hooks-xrpl": "libs/react/hooks/xrpl",
     "react-npm-package": "libs/react/npm-package",
