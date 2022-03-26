@@ -1,5 +1,3 @@
-const withNx = require('@nrwl/next/plugins/with-nx');
-
 const withNextra = require('nextra')({
   theme: 'nextra-theme-docs',
   themeConfig: './theme.config.js',
@@ -32,11 +30,6 @@ module.exports = withNextra({
       {
         source: '/docs',
         destination: '/docs/getting-started',
-        statusCode: 302,
-      },
-      {
-        source: '/examples',
-        destination: '/examples/basic',
         statusCode: 302,
       },
     ];
