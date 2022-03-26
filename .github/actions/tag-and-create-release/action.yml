@@ -1,0 +1,17 @@
+name: Tag and Create Release
+description: Handles tagging the repo and creating a GitHub release based on the provided inputs
+
+inputs:
+  github-token:
+    description: The value of secrets.GITHUB_TOKEN
+    required: true
+  package-root:
+    description: The path to the root of the package being published
+    required: true
+  tag-prefix:
+    description: The prefix to be applied before the version in the git tag/GitHub release
+    required: true
+
+runs:
+  using: node16
+  main: index.js

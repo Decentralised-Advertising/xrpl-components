@@ -1,0 +1,17 @@
+name: Commit a file to the repository
+description: Commit a file to the repository
+
+inputs:
+  repo-access-token:
+    description: The value of secrets.JAMES_HENRY_ACCESS_TOKEN
+    required: true
+  file-path:
+    description: The path to the file to commit
+    required: true
+  commit-message:
+    description: The commit message to be applied
+    required: true
+
+runs:
+  using: node16
+  main: index.js

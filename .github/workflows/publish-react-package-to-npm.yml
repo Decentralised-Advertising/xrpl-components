@@ -1,0 +1,103 @@
+name: 'Publish a release of the @xrpl-components/react package to npm'
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'The new version to publish to npm'
+        required: true
+      ref:
+        description: 'The branch, tag or SHA which will be passed to the checkout action before building and publishing'
+        required: true
+        default: 'main'
+
+jobs:
+  primary:
+    runs-on: ubuntu-latest
+    name: Build and release @xrpl-components/react
+    steps:
+      # ====================================================================================================================
+      #
+      # GitHub does not provide a native way for us to enforce workflow permissions, so we have our own solution to only
+      # allow usernames listed in the array within the `if` below to ensure only certain users can publish the
+      # @xrpl-components/react package to npm.
+      #
+      # ====================================================================================================================
+      - if: contains('["JamesHenry", "scritchley"]', github.actor) != true
+        name: Ensure current actor is allowed to run the workflow
+        run: |
+          echo "Error: Your GitHub username (${{ github.actor }}) is not on the allowed list of admins for this workflow"
+          exit 1
+
+      - uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.JAMES_HENRY_ACCESS_TOKEN }}
+          ref: ${{ github.event.inputs.ref }}
+
+      - name: Install node and yarn based on the volta config in our package.json
+        uses: volta-cli/action@v1
+
+      - name: Get yarn cache directory path and node version for cache key
+        id: yarn-cache-dir-path
+        run: |
+          echo "::set-output name=dir::$(yarn cache dir)"
+          echo "::set-output name=node_version::$(node --version)"
+
+      - uses: actions/cache@v2
+        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-node-${{ steps.yarn-cache-dir-path.outputs.node_version }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-node-${{ steps.yarn-cache-dir-path.outputs.node_version }}-yarn-
+
+      - name: Install dependencies
+        run: yarn --frozen-lockfile --ignore-scripts
+
+      - name: Update react-npm-package package.json version
+        run: |
+          cd libs/react/npm-package
+          npm version ${{ github.event.inputs.version }}
+
+      - name: Build the react-npm-package library
+        run: npx nx build react-npm-package --prod
+
+      - name: Package react-npm-package build artifacts ready for publishing
+        run: |
+          cd dist/react-npm-package
+          npm pack
+
+      - name: Publish the react-npm-package package to the current workflow for reference
+        uses: actions/upload-artifact@v2
+        with:
+          name: react-npm-package
+          path: dist/react-npm-package/*.tgz
+
+      - name: Apply version resolved by volta to standard Node action make authenticated npm publish easier
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ steps.cache-key.outputs.node_version }}
+          registry-url: https://registry.npmjs.org/
+          scope: '@xrpl-components'
+
+      - name: Publish react-npm-package to npm
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          cd dist/react-npm-package
+          npm publish $(ls *.tgz)
+
+      - name: Tag the repo and create a GitHub release for the given version at the given ref
+        uses: ./.github/actions/tag-and-create-release
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          package-root: dist/react-npm-package
+          tag-prefix: react
+
+      - name: GitHub Commit & Push updated package.json
+        uses: ./.github/actions/commit-file-and-push
+        with:
+          # A PAT is needed because we are pushing to a protected branch and the GITHUB_TOKEN cannot be used
+          repo-access-token: ${{ secrets.JAMES_HENRY_ACCESS_TOKEN }}
+          file-path: libs/react/npm-package/package.json
+          commit-message: 'chore: release react-v${{ github.event.inputs.version }}'
