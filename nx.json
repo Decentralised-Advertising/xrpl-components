@@ -13,7 +13,8 @@
     },
     ".eslintrc.json": "*",
     "tools/scripts/copy-built-libs.ts": ["react-npm-package"],
-    "tools/scripts/generate-package-json.ts": ["react-npm-package"]
+    "tools/scripts/generate-package-json.ts": ["react-npm-package"],
+    "tools/eslint-rules/**/*": "*"
   },
   "tasksRunnerOptions": {
     "default": {
@@ -62,5 +63,5 @@
       }
     }
   },
-  "defaultProject": "xrpl-components-demo"
+  "defaultProject": "website"
 }

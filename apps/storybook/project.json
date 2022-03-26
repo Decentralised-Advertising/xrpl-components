@@ -3,6 +3,13 @@
   "sourceRoot": "apps/storybook/src",
   "projectType": "application",
   "tags": [],
+  "implicitDependencies": [
+    "react-components-account-balance",
+    "react-components-address-input",
+    "react-components-amount-input",
+    "react-components-xrpl-context-provider",
+    "react-hooks-xrpl"
+  ],
   "targets": {
     "lint": {
       "executor": "@nrwl/linter:eslint",
