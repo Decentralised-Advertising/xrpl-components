@@ -47,6 +47,8 @@ const TailwindTemplate: Story<AccountBalanceProps & { server: string }> = (
       {({ isLoading, value, currency }) => {
         return (
           <div
+            // Disable snapshot diffing on chromatic until we can figure out a way to render something determinisitcally for it
+            data-chromatic="ignore"
             className="text-4xl bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-100 p-4 h-20 flex items-center justify-center w-80"
             style={{
               fontFamily: `"currency_symbols", 'Space Mono', monospace`,
