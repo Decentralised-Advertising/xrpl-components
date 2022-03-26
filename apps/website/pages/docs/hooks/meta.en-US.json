@@ -1,0 +1,7 @@
+{
+  "use-currency-converter": "useCurrencyConverter()",
+  "use-xrpl": "useXRPL()",
+  "use-xrpl-balances": "useXRPLBalances()",
+  "use-xrpl-context": "useXRPLContext()",
+  "use-xrpl-global": "useXRPLGlobal()"
+}

@@ -1,0 +1,14 @@
+# useCurrencyConverter()
+
+```js
+import { useCurrencyConverter } from '@xrpl-components/react/hooks';
+
+export function YourComponent() {
+  const { rates, error, isLoading } = useCurrencyConverter({
+    fromCurrency: 'XRP',
+    toCurrency: 'USD',
+  });
+
+  return <div>{/* ... */}</div>;
+}
+```

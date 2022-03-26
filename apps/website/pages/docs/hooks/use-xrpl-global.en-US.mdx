@@ -1,0 +1,13 @@
+# useXRPLGlobal()
+
+```js
+import { useXRPLGlobal } from '@xrpl-components/react/hooks';
+
+export function YourComponent() {
+  const { xrpl } = useXRPLGlobal();
+
+  const isValid = xrpl.isValidAddress('rHb9CJAWyB4rj91VRWn96DkukG4bwdtyTh'); // true
+
+  return <div>{/* ... */}</div>;
+}
+```
