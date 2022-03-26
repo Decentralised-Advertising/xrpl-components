@@ -38,7 +38,9 @@ const ExampleContextConsumer = ({ server }: { server: string }) => {
       {isConnected && <h1>Connected</h1>}
       {isConnecting && <h1>Connecting</h1>}
       {error && <h1>Error: {error.message}</h1>}
-      <h1>{ledgerIndex || 'Loading ledger index...'}</h1>
+      <h1 data-chromatic="ignore">
+        {ledgerIndex || 'Loading ledger index...'}
+      </h1>
     </div>
   );
 };
