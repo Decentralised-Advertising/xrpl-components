@@ -55,7 +55,11 @@ export const TailwindReactHookForm: Story<unknown> = () => {
                 Amount
               </label>
               {!ratesError && rates && (
-                <span className="text-sm text-gray-400" id="usd-conversion">
+                <span
+                  className="text-sm text-gray-400"
+                  id="usd-conversion"
+                  data-chromatic="ignore"
+                >
                   {watchAmount && Number(watchAmount) !== 0 ? (
                     <>
                       {watchAmount} XRP &#8773;{' '}
@@ -185,7 +189,11 @@ export const TailwindFormikForm: Story<unknown> = () => {
                     Amount
                   </label>
                   {!ratesError && rates && (
-                    <span className="text-sm text-gray-400" id="usd-conversion">
+                    <span
+                      className="text-sm text-gray-400"
+                      id="usd-conversion"
+                      data-chromatic="ignore"
+                    >
                       {values && Number(values.amount) !== 0 ? (
                         <>
                           {values.amount} XRP &#8773;{' '}
