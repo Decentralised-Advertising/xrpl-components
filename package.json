@@ -1,17 +1,15 @@
 {
   "name": "xrpl-components",
   "private": true,
-  "version": "0.0.0",
-  "license": "MIT",
   "volta": {
     "node": "16.13.1",
     "npm": "8.3.0",
-    "yarn": "1.22.17"
+    "yarn": "1.22.18"
   },
   "scripts": {
-    "start": "nx serve",
-    "build": "nx build",
-    "test": "nx test",
+    "start": "nx serve website",
+    "build": "NODE_ENV=production npx nx build react-npm-package",
+    "test": "nx run-many --target=test --all",
     "storybook": "nx storybook storybook",
     "format": "nx format"
   },
