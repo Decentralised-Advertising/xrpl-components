@@ -43,19 +43,14 @@ const theme = {
     );
   },
   head: ({ title, meta }) => {
-    const { locale, route } = useRouter();
-
-    const ogImage =
-      meta.image ||
-      (locale === 'en-US' || locale === 'es-ES'
-        ? `https://swr-card.vercel.app${
-            /\/index\.+/.test(route) ? '' : '?title=' + title
-          }`
-        : 'https://assets.vercel.com/image/upload/v1572282926/swr/twitter-card.jpg');
+    const ogImage = meta.image || '/og-image.jpg';
+    const ogTitle = title || 'XRPL Components';
+    const ogDescription =
+      meta.description ||
+      'Headless Components and Hooks for building React applications on the XRP Ledger.';
 
     return (
       <>
-        {/* Favicons, meta */}
         <link
           rel="apple-touch-icon"
           sizes="180x180"
@@ -77,35 +72,21 @@ const theme = {
         <link
           rel="mask-icon"
           href="/favicon/safari-pinned-tab.svg"
-          color="#000000"
+          color="#111111"
         />
-        <meta name="msapplication-TileColor" content="#ffffff" />
+        <meta name="msapplication-TileColor" content="#111111" />
         <meta httpEquiv="Content-Language" content="en" />
-        <meta
-          name="description"
-          content={
-            meta.description ||
-            'SWR is a React Hooks library for data fetching. SWR first returns the data from cache (stale), then sends the fetch request (revalidate), and finally comes with the up-to-date data again.'
-          }
-        />
-        <meta
-          name="og:description"
-          content={
-            meta.description ||
-            'SWR is a React Hooks library for data fetching. SWR first returns the data from cache (stale), then sends the fetch request (revalidate), and finally comes with the up-to-date data again.'
-          }
-        />
+        <title>{ogTitle}</title>
+        <meta name="description" content={ogDescription} />
+        <meta name="og:description" content={ogDescription} />
+        <meta property="og:image:width" content="279" />
+        <meta property="og:image:height" content="279" />
+        <meta property="og:title" content={ogTitle} />
+        <meta property="og:image" content={ogImage}></meta>
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:site" content="@vercel" />
+        <meta name="twitter:site" content="@MrJamesHenry" />
         <meta name="twitter:image" content={ogImage} />
-        <meta
-          name="og:title"
-          content={
-            title ? title + ' – SWR' : 'SWR: React Hooks for Data Fetching'
-          }
-        />
-        <meta name="og:image" content={ogImage} />
-        <meta name="apple-mobile-web-app-title" content="SWR" />
+        <meta name="apple-mobile-web-app-title" content="XRPL Components" />
       </>
     );
   },
