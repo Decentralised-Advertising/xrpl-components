@@ -1,6 +1,6 @@
 {
   "name": "@xrpl-components/react",
-  "version": "0.0.1",
+  "version": "0.0.4",
   "repository": {
     "type": "git",
     "url": "https://github.com/decentralised-advertising/xrpl-components.git"
