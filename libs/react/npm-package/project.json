@@ -5,6 +5,8 @@
   "implicitDependencies": [
     "react-components-account-balance",
     "react-components-xrpl-context-provider",
+    "react-components-address-input",
+    "react-components-amount-input",
     "react-hooks-xrpl"
   ],
   "targets": {

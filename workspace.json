@@ -1,6 +1,7 @@
 {
   "version": 2,
   "projects": {
+    "eslint-rules": "tools/eslint-rules",
     "react-components-account-balance": "libs/react/components/account-balance",
     "react-components-address-input": "libs/react/components/address-input",
     "react-components-amount-input": "libs/react/components/amount-input",
