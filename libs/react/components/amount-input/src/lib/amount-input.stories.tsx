@@ -190,7 +190,7 @@ export const TailwindFormikForm: Story<unknown> = () => {
                   </label>
                   {!ratesError && rates && (
                     <span
-                      className="text-sm text-gray-400 chromatic-ignore"
+                      className="text-sm text-gray-400"
                       id="usd-conversion"
                       data-chromatic="ignore"
                     >
