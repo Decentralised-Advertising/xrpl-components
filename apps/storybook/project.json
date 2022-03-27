@@ -23,7 +23,6 @@
       "options": {
         "uiFramework": "@storybook/react",
         "port": 4400,
-        "staticDir": ["apps/storybook/src/assets"],
         "config": {
           "configFolder": "apps/storybook/.storybook"
         }
@@ -40,7 +39,6 @@
       "options": {
         "uiFramework": "@storybook/react",
         "outputPath": "dist/apps/storybook",
-        "staticDir": ["apps/storybook/src/assets"],
         "config": {
           "configFolder": "apps/storybook/.storybook"
         }
