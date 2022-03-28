@@ -1,96 +1,73 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import type { Client } from 'xrpl';
-import { resolveXRPL } from './resolve-xrpl-client';
+import { resolveXRPL, XRPL } from './resolve-xrpl-client';
 
 export interface IUseXRPLConfig {
-  server?: string;
-  xrpl?: { Client: typeof Client };
+  server: string;
+  xrpl?: XRPL;
 }
 
+type ConnectionState = 'disconnected' | 'connecting' | 'connected';
+
 export interface IUseXRPL {
-  client: Client | undefined;
-  isConnected: boolean;
-  isConnecting: boolean;
-  error: any;
+  client: Client | null;
+  connectionState: ConnectionState;
+  error: Error | null;
   reconnect: () => void;
 }
 
 export function useXRPL({ server, xrpl }: IUseXRPLConfig): IUseXRPL {
-  const [connectedServer, setConnectedServer] = useState<string>();
-  const [isConnected, setIsConnected] = useState(false);
-  const [isConnecting, setIsConnecting] = useState(false);
-  const [client, setClient] = useState<Client | undefined>();
-  const [oldClient, setOldClient] = useState<Client | undefined>();
-  const [error, setError] = useState<any | null>(null);
+  const [xrplInstance] = useState<XRPL>(() => xrpl || resolveXRPL());
+  const [connectionState, setConnectionState] =
+    useState<ConnectionState>('disconnected');
+  const [error, setError] = useState<Error | null>(null);
+  const client = useRef<Client | null>(null);
 
-  const reconnect = async () => {
-    if (!server) {
-      return;
-    }
-    if (server === connectedServer && isConnected) {
-      return;
-    }
-    if (client) {
-      setOldClient(client);
-    }
-    const xrplApi = xrpl || resolveXRPL();
-    const newClient: Client = new xrplApi.Client(server);
-    newClient.on('connected', () => {
-      setIsConnecting(false);
-      setIsConnected(true);
-      setClient(newClient);
-      setConnectedServer(server);
-    });
-    newClient.on('disconnected', () => setIsConnected(false));
-    newClient.on('error', (errorCode: any, errorMessage: any) => {
-      setError({ errorCode, errorMessage });
-    });
-    setIsConnecting(true);
-    setIsConnected(false);
-    setError(false);
-    newClient.connect().catch((err) => {
-      setError(err);
-      setIsConnecting(false);
-      setClient(undefined);
-    });
-  };
+  const reconnect = useCallback(async () => {
+    try {
+      setError(null);
+      setConnectionState('connecting');
+      client.current = new xrplInstance.Client(server);
 
-  const disconnect = async (client: Client) => {
-    // TODO: Determine the correct behaviour for disconnecting a client.
-    // await client.disconnect()
-  };
+      client.current.on('connected', () => {
+        setConnectionState('connected');
+      });
 
-  useEffect(() => {
-    oldClient && disconnect(oldClient);
-  }, [oldClient]);
+      client.current.on('disconnected', () => {
+        setConnectionState('disconnected');
+      });
+
+      await client.current.connect();
+    } catch (err) {
+      if (err instanceof Error) {
+        setError(err);
+        return;
+      }
+      if (typeof err === 'string') {
+        setError(new Error(err));
+        return;
+      }
+      setError(new Error('Unknown error'));
+    }
+  }, [server, xrplInstance]);
 
   useEffect(() => {
     reconnect();
-  }, [server, reconnect]);
+
+    return () => {
+      setConnectionState('disconnected');
+      if (client.current) {
+        client.current.disconnect();
+        client.current.removeAllListeners();
+      }
+      client.current = null;
+    };
+  }, [server, xrplInstance, reconnect]);
 
   return {
-    /**
-     * TODO: Verify hook behaviour when the client is not available (e.g. CDN reference missing)
-     */
-    client,
-    isConnected,
-    isConnecting,
+    client: client.current,
+    connectionState,
     error,
     reconnect,
   };
-}
-
-/**
- * Ignore WebSocket DisconnectErrors. Useful for making requests where we don't
- * care about the response and plan to teardown the test before the response
- * has come back.
- *
- * @param error - Thrown error.
- * @throws If error is not websocket disconnect error.
- */
-export function ignoreWebSocketDisconnect(error: Error): void {
-  if (error.message === 'websocket was closed') {
-    return;
-  }
-  throw error;
 }

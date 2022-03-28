@@ -8,9 +8,7 @@ Check out the Storybook (via the link in the navbar) so see live examples of `@x
 import { useXRPLContext } from '@xrpl-components/react/hooks';
 
 export function YourComponent() {
-  const { client, isConnected, isConnecting, error, reconnect } = useXRPLContext({
-    // options
-  });
+  const { client, connectionState, error, reconnect } = useXRPLContext();
 
   return <div>{/* ... */}</div>;
 }

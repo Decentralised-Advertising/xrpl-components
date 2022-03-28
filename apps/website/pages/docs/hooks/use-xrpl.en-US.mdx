@@ -8,8 +8,8 @@ Check out the Storybook (via the link in the navbar) so see live examples of `@x
 import { useXRPL } from '@xrpl-components/react/hooks';
 
 export function YourComponent() {
-  const { client, isConnected, isConnecting, error, reconnect } = useXRPL({
-    // options
+  const { client, connectionState, error, reconnect } = useXRPL({
+    server: 'wss://s1.ripple.com',
   });
 
   return <div>{/* ... */}</div>;
