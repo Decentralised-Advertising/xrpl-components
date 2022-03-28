@@ -17,12 +17,12 @@ export default {
 } as Meta;
 
 const ExampleContextConsumer = ({ server }: { server: string }) => {
-  const { client, isConnected, isConnecting, error } = useXRPLContext();
+  const { client, connectionState, error, reconnect } = useXRPLContext();
   const [ledgerIndex, setLedgerIndex] = useState<number | null>();
 
   useEffect(() => {
     async function updateLedgerIndex() {
-      if (!client) {
+      if (!client || connectionState !== 'connected') {
         setLedgerIndex(null);
         return;
       }
@@ -30,17 +30,23 @@ const ExampleContextConsumer = ({ server }: { server: string }) => {
       setLedgerIndex(l);
     }
     updateLedgerIndex();
-  }, [client]);
+  }, [client, connectionState]);
 
   return (
     <div>
       <h1>{server}</h1>
-      {isConnected && <h1>Connected</h1>}
-      {isConnecting && <h1>Connecting</h1>}
+      {connectionState && <h1>{connectionState}</h1>}
       {error && <h1>Error: {error.message}</h1>}
       <h1 data-chromatic="ignore">
         {ledgerIndex || 'Loading ledger index...'}
       </h1>
+
+      <button
+        className={`mt-12 px-6 py-3 bg-gradient-to-r from-teal-400 to-blue-500 text-white text-base leading-6 font-medium shadow border-transparent rounded inline-flex items-center justify-center transition ease-in-out duration-150 cursor-pointer hover:from-teal-500 hover:to-blue-600`}
+        onClick={() => reconnect()}
+      >
+        Manually Reconnect
+      </button>
     </div>
   );
 };

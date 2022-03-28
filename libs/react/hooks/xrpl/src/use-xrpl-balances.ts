@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import type { LedgerIndex } from 'xrpl/dist/npm/models/common';
 import { useXRPLContext } from './use-xrpl-context';
 
@@ -11,7 +11,7 @@ export function useXRPLBalances(
     limit?: number;
   }
 ) {
-  const { client } = useXRPLContext();
+  const { client, connectionState } = useXRPLContext();
   const [data, setData] = useState<
     | {
         value: string;
@@ -21,12 +21,13 @@ export function useXRPLBalances(
     | null
   >(null);
   const [error, setError] = useState(null);
-  const refreshBalances = () => {
-    if (!client) {
-      return;
-    }
+
+  const refreshBalances = useCallback(() => {
     setData(null);
     setError(null);
+    if (!client || connectionState !== 'connected') {
+      return;
+    }
     client
       .getBalances(address, options)
       .then((data) => {
@@ -37,10 +38,12 @@ export function useXRPLBalances(
         setError(err);
         setData(null);
       });
-  };
+  }, [client, connectionState, address, options]);
+
   useEffect(() => {
     refreshBalances();
   }, [address, client, refreshBalances]);
+
   return {
     data,
     error,

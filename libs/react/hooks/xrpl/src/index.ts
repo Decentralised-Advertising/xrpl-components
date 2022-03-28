@@ -8,3 +8,4 @@ export { useXRPLRequest } from './use-xrpl-request';
 export * as utils from './utils';
 export { useXRPLGlobal } from './use-xrpl-global';
 export { useCurrencyConverter } from './use-currency-converter';
+export type { XRPL } from './resolve-xrpl-client';

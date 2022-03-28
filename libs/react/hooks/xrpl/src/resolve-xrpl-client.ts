@@ -1,6 +1,8 @@
 import type * as xrpl from 'xrpl';
 
-export function resolveXRPL(): typeof xrpl {
+export type XRPL = typeof xrpl;
+
+export function resolveXRPL(): XRPL {
   if ((window as any)?.xrpl) {
     return (window as any).xrpl;
   }
@@ -9,7 +11,7 @@ export function resolveXRPL(): typeof xrpl {
   );
 }
 
-export function resolveXRPLClient(): typeof xrpl.Client {
+export function resolveXRPLClient(): XRPL['Client'] {
   try {
     const xrpl = resolveXRPL();
     return xrpl.Client;
