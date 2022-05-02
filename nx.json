@@ -14,7 +14,8 @@
     ".eslintrc.json": "*",
     "tools/scripts/copy-built-libs.ts": ["react-npm-package"],
     "tools/scripts/generate-package-json.ts": ["react-npm-package"],
-    "tools/eslint-rules/**/*": "*"
+    "tools/eslint-rules/**/*": "*",
+    ".github/workflows/ci.yml": "*"
   },
   "tasksRunnerOptions": {
     "default": {
