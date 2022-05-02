@@ -13,7 +13,7 @@ concurrency:
 jobs:
   main:
     name: Nx Cloud - Main Job
-    uses: nrwl/ci/.github/workflows/nx-cloud-main.yml@v0.1
+    uses: nrwl/ci/.github/workflows/nx-cloud-main.yml@8b799d4bc26a289a67edf350c83d0739018c353c
     with:
       parallel-commands: |
         npx nx workspace-lint
@@ -27,6 +27,6 @@ jobs:
 
   agents:
     name: Nx Cloud - Agents
-    uses: nrwl/ci/.github/workflows/nx-cloud-agents.yml@v0.1
+    uses: nrwl/ci/.github/workflows/nx-cloud-agents.yml@8b799d4bc26a289a67edf350c83d0739018c353c
     with:
       number-of-agents: 3
